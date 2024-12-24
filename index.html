@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Media</title>
+    <!--css-->
+    <link href="style.css" rel="stylesheet">
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <h1>Uploud media</h1>
+    <form class="cards">
+        <!--image start-->
+        <div class="img-div">
+            <img class="anon-pic" src="img/Anonymous-Profile-pic.jpg" alt="">
+
+            <label class="img-lab" for="img">Upload image </label><br>
+            <input type="file" id="img" accept="image/*"><br>
+        </div>
+        <!--image end-->
+        <!--video start-->
+        <div class="vid-div">
+            <img class="vid-pic" src="img/video.png" alt="">
+            <label class="vid-lab" for="vid">Upload video </label><br>
+            <input type="file" id="vid" accept="video/*"><br>
+            
+        </div>
+        <!--video end-->
+        <!--audio start-->
+        <div class="audio-div">
+            <img class="audio-pic" src="img/equalizer.png" alt="">
+            <label class="audio-lab" for="aud">Upload audio </label><br>
+            <input type="file" id="aud" accept="audio/*"><br>
+        <div>
+        <!--audio end-->
+    </form>
+
+    <!--javascript-->
+    <script>
+        // JavaScript to handle the image preview
+        const imgInput = document.getElementById('img');
+        const preview = document.querySelector('.anon-pic');
+    
+        imgInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result; // Set the preview image source
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+         // الفيديو: إظهار معاينة الفيديو المرفوع
+    const vidInput = document.getElementById('vid');
+    const vidPlaceholder = document.querySelector('.vid-pic'); // العنصر الذي يظهر قبل رفع الفيديو
+
+    vidInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const fileURL = URL.createObjectURL(file); // إنشاء رابط الفيديو
+            const videoElement = document.createElement('video'); // إنشاء عنصر فيديو
+            videoElement.src = fileURL;
+            videoElement.controls = true; // إضافة أدوات التحكم بالفيديو
+            videoElement.style.width = '200px'; // تحديد عرض الفيديو
+            videoElement.style.height = '200px'; // تحديد ارتفاع الفيديو
+            videoElement.style.position = 'absolute'; // نفس موضع العنصر البديل
+            videoElement.style.top = '10%';
+            videoElement.style.left = '25%';
+            videoElement.style.borderRadius = '15px';
+            vidPlaceholder.replaceWith(videoElement); // استبدال العنصر القديم بالفيديو
+        }
+    });
+
+    // الصوت: إضافة إشارة تدل على رفع ملف صوتي
+    const audInput = document.getElementById('aud');
+    const audPlaceholder = document.querySelector('.audio-pic'); // العنصر الذي يظهر قبل رفع الصوت
+
+    audInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const audioIcon = document.createElement('div'); // إنشاء عنصر للإشارة إلى رفع الصوت
+            audioIcon.textContent = "Audio Uploaded!"; // النص الذي يظهر
+            audioIcon.style.position = 'absolute';
+            audioIcon.style.top = '50%';
+            audioIcon.style.left = '50%';
+            audioIcon.style.transform = 'translate(-50%, -50%)';
+            audioIcon.style.color = 'white';
+            audioIcon.style.fontWeight = 'bold';
+            audPlaceholder.replaceWith(audioIcon); // استبدال العنصر القديم بالإشارة
+        }
+    });
+    </script>
+    
+</body>
+</html>

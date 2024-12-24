@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100;
+    min-width: 100%; 
+
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgba(224,191,246,1) 0%, rgba(250,250,250,1) 99%);
+    overflow-x: hidden;
+    width: 100%; /* تأكد أن العرض مغطى بالكامل */
+    min-width: 100%; /* لا تترك أي مساحة أفقية غير مرغوب فيها */
+
+}
+/* تخصيص شريط التمرير */
+::-webkit-scrollbar {
+    width: 5px; /* عرض الشريط */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #493465; /* لون شريط التمرير */
+    border-radius: 6px; /* تحديد حواف دائرية */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9c3fa3; /* لون شريط التمرير عند التمرير عليه */
+}
+
+::-webkit-scrollbar-track {
+    background-color:  rgba(250,250,250,1); /* خلفية الشريط */
+    border-radius: 0;
+}
+
+h1{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    padding: 10px;
+    background-color:rgb(138, 99, 174);
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    text-align: center;
+
+}
+form{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 10px;
+}
+/*div*/
+.img-div{
+    width: 400px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(154, 116, 190, 0.558);
+    border-radius: 10px;
+    margin: 0 20px 0 0;
+    text-align: center;
+    padding: 10px;
+    overflow: hidden;
+    
+}
+.anon-pic{
+    width: 200px;
+    border-radius: 15px;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    object-fit: cover; /* يجعل الصورة تتناسب مع المساحة المحددة */
+    border-radius: inherit; /* الحفاظ على الزوايا الدائرية إن وجدت */
+    max-width: 200px;
+    max-height: 200px;
+
+}
+
+.vid-div{
+    width: 400px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(154, 116, 190, 0.558);
+    border-radius: 10px;
+    margin: 0 20px 0 0;
+    text-align: center;
+    padding: 10px;
+    overflow: hidden;
+}
+.vid-pic{
+    width: 200px;
+    border-radius: 15px;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    object-fit: cover; /* يجعل الصورة تتناسب مع المساحة المحددة */
+    border-radius: inherit; /* الحفاظ على الزوايا الدائرية إن وجدت */
+    max-width: 400px;
+    max-height: 400px;
+
+}
+
+.audio-div{
+    width: 400px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(154, 116, 190, 0.558);
+    border-radius: 10px;
+    margin: 0 20px 0 0;
+    text-align: center;
+    padding: 10px;
+    overflow: hidden;
+}
+.audio-pic{
+    width: 200px;
+    border-radius: 15px;
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    object-fit: cover; /* يجعل الصورة تتناسب مع المساحة المحددة */
+    border-radius: inherit; /* الحفاظ على الزوايا الدائرية إن وجدت */
+    max-width: 200px;
+    max-height: 200px;
+
+}
+/*--------------------------------------------------------------------------*/
+/*lable button*/
+.img-lab{
+    background-color:rgb(138, 99, 174);
+    padding: 10px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.img-lab:hover {
+    background-color: #cf00f8; /* اللون الجديد عند المرور */
+}
+.vid-lab{
+    background-color:rgb(138, 99, 174);
+    padding: 10px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.vid-lab:hover {
+    background-color: #cf00f8; /* اللون الجديد عند المرور */
+}
+.audio-lab{
+    background-color:rgb(138, 99, 174);
+    padding: 10px;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.audio-lab:hover {
+    background-color: #cf00f8; /* اللون الجديد عند المرور */
+}
+/*--------------------------------------------------------------------------*/
+/*hide the file button*/
+#img{
+    visibility: hidden;
+}
+#vid{
+    visibility: hidden;
+}
+#aud{
+    visibility: hidden;
+}
