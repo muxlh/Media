@@ -210,3 +210,59 @@ form{
 #aud{
     visibility: hidden;
 }
+
+
+/*--------------------------------------------------------------------------*/
+/*for phone*/
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        padding: 10px;
+        height: 125vh;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        overflow-y: auto;
+        position: absolute;
+        top: 20%;
+    }
+
+    .img-div, .vid-div, .audio-div {
+        width: 90%; /* عرض أقل يناسب الشاشات الصغيرة */
+        height: 300px; /* اجعل الارتفاع تلقائياً */
+        margin: 10px 0; /* أضف مسافات بين العناصر */
+    }
+
+    h1 {
+        top: 5%; /* تعديل الموقع العلوي */
+        left: 50%; /* تعديل الموقع الأفقي */
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem; /* حجم أصغر للنص */
+    }
+
+    .img-lab, .vid-lab, .audio-lab {
+        top: 90%; /* تعديل موقع الأزرار */
+        font-size: 0.9rem; /* تصغير حجم النص */
+    }
+
+    .anon-pic, .vid-pic, .audio-pic {
+        width: 150px; /* حجم أصغر للصور */
+        height: 150px;
+        top: 5%; /* تعديل موقع الصور */
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
+
+/*--------------------------------------------------------------------------*/
+/* تحسين لتقليل المسافة بين العناصر */
+form > div {
+    margin-bottom: 15px;
+}
+
+
+
