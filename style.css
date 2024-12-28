@@ -12,9 +12,9 @@ html {
 
 }
 body{
-    display: flex;
-    flex-direction: column;
+    display:block;
     min-height: 100vh;
+    height: 150vh;
     background: radial-gradient(circle, rgba(224,191,246,1) 0%, rgba(250,250,250,1) 99%);
     overflow-x: hidden;
     width: 100%; /* تأكد أن العرض مغطى بالكامل */
@@ -62,7 +62,7 @@ form{
     margin: 10px;
 }
 /*div*/
-.img-div{
+.img-div, .vid-div, .audio-div{
     width: 400px;
     height: 350px;
     position: relative;
@@ -77,61 +77,7 @@ form{
     overflow: hidden;
     
 }
-.anon-pic{
-    width: 200px;
-    border-radius: 15px;
-    position: absolute;
-    top: 10%;
-    left: 25%;
-    object-fit: cover; /* يجعل الصورة تتناسب مع المساحة المحددة */
-    border-radius: inherit; /* الحفاظ على الزوايا الدائرية إن وجدت */
-    max-width: 200px;
-    max-height: 200px;
-
-}
-
-.vid-div{
-    width: 400px;
-    height: 350px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: rgba(154, 116, 190, 0.558);
-    border-radius: 10px;
-    margin: 0 20px 0 0;
-    text-align: center;
-    padding: 10px;
-    overflow: hidden;
-}
-.vid-pic{
-    width: 200px;
-    border-radius: 15px;
-    position: absolute;
-    top: 10%;
-    left: 25%;
-    object-fit: cover; /* يجعل الصورة تتناسب مع المساحة المحددة */
-    border-radius: inherit; /* الحفاظ على الزوايا الدائرية إن وجدت */
-    max-width: 400px;
-    max-height: 400px;
-
-}
-
-.audio-div{
-    width: 400px;
-    height: 350px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: rgba(154, 116, 190, 0.558);
-    border-radius: 10px;
-    margin: 0 20px 0 0;
-    text-align: center;
-    padding: 10px;
-    overflow: hidden;
-}
-.audio-pic{
+.anon-pic, .vid-pic, .audio-pic{
     width: 200px;
     border-radius: 15px;
     position: absolute;
@@ -145,7 +91,7 @@ form{
 }
 /*--------------------------------------------------------------------------*/
 /*lable button*/
-.img-lab{
+.img-lab, .audio-lab, .vid-lab, .audio-but{
     background-color:rgb(138, 99, 174);
     padding: 10px;
     color: white;
@@ -159,66 +105,37 @@ form{
     justify-content: end;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-.img-lab:hover {
-    background-color: #cf00f8; /* اللون الجديد عند المرور */
-}
-.vid-lab{
-    background-color:rgb(138, 99, 174);
-    padding: 10px;
-    color: white;
-    font-weight: bolder;
-    border-radius: 10px;
-    position: absolute;
-    top: 87%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: end;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.vid-lab:hover {
-    background-color: #cf00f8; /* اللون الجديد عند المرور */
 }
 .audio-lab{
-    background-color:rgb(138, 99, 174);
-    padding: 10px;
-    color: white;
-    font-weight: bolder;
-    border-radius: 10px;
+    top: 87%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+.audio-but{
+    border: #9c3fa3;
     position: absolute;
     top: 87%;
-    left: 50%;
+    left: 70%;
     transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: end;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-size:medium
 }
-.audio-lab:hover {
+.img-lab:hover, .vid-lab:hover, .audio-lab:hover, .rec-lab:hover, .audio-but:hover {
     background-color: #cf00f8; /* اللون الجديد عند المرور */
 }
+
 /*--------------------------------------------------------------------------*/
 /*hide the file button*/
-#img{
-    visibility: hidden;
-}
-#vid{
-    visibility: hidden;
-}
-#aud{
+#img, #vid, #aud, #rec{
     visibility: hidden;
 }
 
-
-/*--------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------*/
 /*for phone*/
 @media (max-width: 768px) {
     body {
         flex-direction: column;
         padding: 10px;
-        height: 125vh;
+        height: 200vh;
     }
 
     form {
@@ -257,12 +174,8 @@ form{
         transform: translate(-50%, 0);
     }
 }
-
 /*--------------------------------------------------------------------------*/
 /* تحسين لتقليل المسافة بين العناصر */
 form > div {
     margin-bottom: 15px;
 }
-
-
-
