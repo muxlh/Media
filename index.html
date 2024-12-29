@@ -25,7 +25,6 @@
             <img class="vid-pic" src="img/video.png" alt="">
             <label class="vid-lab" for="vid">Upload video </label><br>
             <input type="file" id="vid" accept="video/*"><br>
-            
         </div>
         <!--video end-->
         <!--audio start-->
@@ -76,96 +75,81 @@
             }
         });
 
-        // الصوت: إضافة إشارة تدل على رفع ملف صوتي
+        // الصوت: إضافة معاينة للصوت المرفوع
         const audInput = document.getElementById('aud');
         const audPlaceholder = document.querySelector('.audio-pic'); // العنصر الذي يظهر قبل رفع الصوت
 
         audInput.addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
-                const audioIcon = document.createElement('div'); // إنشاء عنصر للإشارة إلى رفع الصوت
-                audioIcon.textContent = "Audio Uploaded!"; // النص الذي يظهر
-                audioIcon.style.position = 'absolute';
-                audioIcon.style.top = '50%';
-                audioIcon.style.left = '50%';
-                audioIcon.style.transform = 'translate(-50%, -50%)';
-                audioIcon.style.color = 'white';
-                audioIcon.style.fontWeight = 'bold';
-                audPlaceholder.replaceWith(audioIcon); // استبدال العنصر القديم بالإشارة
+                const fileURL = URL.createObjectURL(file); // إنشاء رابط الصوت
+                const audioElement = document.createElement('audio'); // إنشاء عنصر صوتي
+                audioElement.src = fileURL;
+                audioElement.controls = true; // إضافة أدوات التحكم
+                audioElement.style.display = 'block'; // لتنسيق العرض
+
+                audPlaceholder.replaceWith(audioElement); // استبدال العنصر القديم بالصوت
             }
         });
 
-    // زر التسجيل الصوتي
-const recordButton = document.getElementById('rec-btn');
-let mediaRecorder; // متغير لتخزين كائن MediaRecorder
-let audioChunks = []; // لتخزين مقاطع الصوت المسجلة
+        // زر التسجيل الصوتي
+        const recordButton = document.getElementById('rec-btn');
+        let mediaRecorder; // متغير لتخزين كائن MediaRecorder
+        let audioChunks = []; // لتخزين مقاطع الصوت المسجلة
 
-recordButton.addEventListener('click', async () => {
-    // إذا لم يتم إنشاء MediaRecorder أو إذا كان في حالة "غير نشط"
-    if (!mediaRecorder || mediaRecorder.state === "inactive") {
-        try {
-            // طلب إذن الوصول إلى الميكروفون
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
+        recordButton.addEventListener('click', async () => {
+            // إذا لم يتم إنشاء MediaRecorder أو إذا كان في حالة "غير نشط"
+            if (!mediaRecorder || mediaRecorder.state === "inactive") {
+                try {
+                    // طلب إذن الوصول إلى الميكروفون
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
 
-            // بدء التسجيل
-            mediaRecorder.addEventListener('start', () => {
-                audioChunks = [];
-                recordButton.textContent = "Stop";
-                recordButton.style.backgroundColor = "#ff5252";
-            });
+                    // بدء التسجيل
+                    mediaRecorder.addEventListener('start', () => {
+                        audioChunks = [];
+                        recordButton.textContent = "Stop";
+                        recordButton.style.backgroundColor = "#ff5252";
+                    });
 
-            // تخزين مقاطع الصوت أثناء التسجيل
-            mediaRecorder.addEventListener('dataavailable', event => {
-                audioChunks.push(event.data);
-            });
+                    // تخزين مقاطع الصوت أثناء التسجيل
+                    mediaRecorder.addEventListener('dataavailable', event => {
+                        audioChunks.push(event.data);
+                    });
 
-            // عند انتهاء التسجيل
-            mediaRecorder.addEventListener('stop', () => {
-                // تحويل المقاطع المسجلة إلى ملف صوتي
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                const file = new File([audioBlob], "recorded-audio.wav", { type: "audio/wav" });
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
+                    // عند انتهاء التسجيل
+                    mediaRecorder.addEventListener('stop', () => {
+                        // تحويل المقاطع المسجلة إلى ملف صوتي
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const fileURL = URL.createObjectURL(audioBlob); // إنشاء رابط للصوت
 
-                // تعيين الملف الصوتي المرفوع في `<input>`
-                const audioInput = document.getElementById('aud');
-                audioInput.files = dataTransfer.files;
+                        // إنشاء مشغل صوتي
+                        const audioElement = document.createElement('audio');
+                        audioElement.src = fileURL;
+                        audioElement.controls = true; // إضافة أدوات التحكم
+                        audioElement.style.display = 'block';
 
-                // تحديث زر التسجيل
-                recordButton.textContent = "Record";
-                recordButton.style.backgroundColor = "";
+                        // استبدال الصورة بالمشغل الصوتي
+                        const audioPlaceholder = document.querySelector('.audio-pic'); // العنصر الذي يظهر قبل التسجيل
+                        audioPlaceholder.replaceWith(audioElement);
 
-                // استبدال الصورة برسالة
-                const audioPlaceholder = document.querySelector('.audio-pic'); // العنصر الذي يظهر قبل التسجيل
-                const audioUploadedMessage = document.createElement('div');
-                audioUploadedMessage.textContent = "Record Uploaded!";
-                audioUploadedMessage.style.position = 'absolute';
-                audioUploadedMessage.style.top = '50%';
-                audioUploadedMessage.style.left = '50%';
-                audioUploadedMessage.style.transform = 'translate(-50%, -50%)';
-                audioUploadedMessage.style.color = 'white';
-                audioUploadedMessage.style.fontWeight = 'bold';
-                audioUploadedMessage.style.background = '#4CAF50';
-                audioUploadedMessage.style.padding = '10px 20px';
-                audioUploadedMessage.style.borderRadius = '10px';
-                audioUploadedMessage.style.textAlign = 'center';
-                audioPlaceholder.replaceWith(audioUploadedMessage);
-            });
+                        // تحديث زر التسجيل
+                        recordButton.textContent = "Record";
+                        recordButton.style.backgroundColor = "";
+                    });
 
-            // بدء التسجيل
-            mediaRecorder.start();
-        } catch (error) {
-            alert('Permission to access microphone denied or an error occurred.');
-            console.error(error);
-        }
-    } else {
-        // إذا كان التسجيل جارياً، قم بإنهائه
-        mediaRecorder.stop();
-    }
-});
+                    // بدء التسجيل
+                    mediaRecorder.start();
+                } catch (error) {
+                    alert('Permission to access microphone denied or an error occurred.');
+                    console.error(error);
+                }
+            } else {
+                // إذا كان التسجيل جارياً، قم بإنهائه
+                mediaRecorder.stop();
+            }
+        });
 
     </script>
-    
 </body>
 </html>
